@@ -1,4 +1,4 @@
-const CreateTaskPage = () => {
+function CreateTaskPage () {
   return <></>;
 };
 
