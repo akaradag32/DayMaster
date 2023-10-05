@@ -1,42 +1,56 @@
-#root {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
+body{
+  background-color: #f5f6fa;
+  margin: 0;
+  height: 100vh;
+  font-family: OpenSans, Arial, sans-serif;
+  overflow: hidden;
+}
+
+nav {
+  width: 100%;
+  background-color: #dae0ed;
+  padding: 10px 50px;
+  display: flex;
+}
+
+.logo{
+  height: 50px;
+}
+
+.welcome-text{
+  width: 50%;
+  max-width: 670px;
   text-align: center;
+  color: #383838;
+  font-weight: 600;
+  margin-bottom: 60px;
 }
 
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
+.container{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: calc(100vh - 200px); 
+  flex-direction: column;
 }
 
-@keyframes logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.button {
+  width: 150px;
+  background-color: #9c73ff;
+  border-radius: 10px;
+  display: flex;
+  padding: 7px;
+  align-items: center;
+  color: white;
+  text-decoration: none;
+  font-weight: 200;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
-  }
+.button-icon img {
+  height: 30px;
 }
 
-.card {
-  padding: 2em;
-}
-
-.read-the-docs {
-  color: #888;
+.button-icon  {
+  display: flex;
+  margin-right: 30px;
 }

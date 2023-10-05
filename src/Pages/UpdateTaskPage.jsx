@@ -1,5 +1,11 @@
+import Navbar from "../components/Navbar";
+
 function UpdateTaskPage () {
-  return <></>;
+  return (
+    <>
+      <Navbar/>
+    </>
+  )
 };
 
 export default UpdateTaskPage;

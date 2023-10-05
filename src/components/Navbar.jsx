@@ -1,7 +1,8 @@
+import logo from '../assets/logo.png';
 function Navbar() {
     return (
         <nav>
-            WikiCountries
+            <img src={logo} alt="logo" className = "logo" />
         </nav>
     )
 }

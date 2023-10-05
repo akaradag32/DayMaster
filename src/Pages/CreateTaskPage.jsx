@@ -1,5 +1,9 @@
+import Navbar from "../components/Navbar";
+
 function CreateTaskPage () {
-  return <></>;
+  return (
+    <Navbar/>
+  );
 };
 
 export default CreateTaskPage;
