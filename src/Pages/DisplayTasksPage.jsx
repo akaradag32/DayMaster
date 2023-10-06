@@ -57,36 +57,41 @@ function DisplayTasksPage() {
   return (
     <div>
       <Navbar/>
-      <div>
-        {currentMonthName}
+      <div className='container'>
+        <div>
+          <p className='month'>
+            {currentMonthName.toUpperCase()}
+          </p>
+        </div>
+        <div className='task-manager-container'>
+          {daysOfWeek.map((day, index) => {
+            const date = new Date(currentDate);
+            date.setDate(currentDate.getDate() + index);
+
+            const currentDay = date.getDate();
+            const currentDayName = day
+            const currentYear = date.getFullYear();
+            const currentMonth = date.getMonth() + 1;
+
+            return (
+              <div key={currentDay}>
+                {currentDay}
+                <br />
+                {currentDayName}
+                <div>
+                  {task.map((task) => {
+                    if (task.dueDate == `${currentMonth}/${currentDay}/${currentYear}`) {
+                      return <Button key={task.id} />;
+                    }
+                  })}
+                </div>
+              </div>
+            );
+          })}
+        </div>
         <button onClick={goToPreviousWeek}>Left</button>
         <button onClick={goToNextWeek}>Right</button>
       </div>
-      {daysOfWeek.map((day, index) => {
-        const date = new Date(currentDate);
-        date.setDate(currentDate.getDate() + index);
-
-        const currentDay = date.getDate();
-        const currentDayName = day
-        const currentYear = date.getFullYear();
-        const currentMonth = date.getMonth() + 1;
-
-        return (
-          <div key={currentDay}>
-            {currentDay}
-            <br />
-            {currentDayName}
-            <div>
-            {task.map((task) => {
-              if (task.dueDate == `${currentMonth}/${currentDay}/${currentYear}`) {
-                return <Button key={task.id} />;
-              }
-            })}
-      </div>
-          </div>
-          
-        );
-      })}
     </div>
   );
 }

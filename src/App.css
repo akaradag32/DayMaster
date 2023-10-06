@@ -54,3 +54,16 @@ nav {
   display: flex;
   margin-right: 30px;
 }
+
+.task-manager-container {
+  width:80%;
+  background-color: white;
+  border: 1px solid #dae0ed;
+  border-radius: 30px;
+}
+
+.month {
+  color: #383838;
+  font-size: 22px;
+  font-weight: 600;
+}
