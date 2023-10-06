@@ -1,5 +1,6 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Navbar from '../components/Navbar';
+import Button from '../components/Button';
 
 function DisplayTasksPage() {
   const [currentDate, setCurrentDate] = useState(new Date());
@@ -15,7 +16,6 @@ function DisplayTasksPage() {
     // console.log(date.getDay())
   };
 
-
   const goToPreviousWeek = () => {
     const newDate = new Date(currentDate);
     newDate.setDate(newDate.getDate() - 7);
@@ -29,6 +29,30 @@ function DisplayTasksPage() {
   };
 
   setToMonday(currentDate); 
+
+  const [task, setTask] = useState([]);
+
+  const fetchTask = async () => {
+    try {
+      const response = await fetch(`${import.meta.env.VITE_API_URL}/tasks`);
+
+      if (response.ok) {
+        const allTask = await response.json();
+
+        setTask(allTask);
+      }
+    } catch (error) {
+      console.error("Error fetching data:", error);
+    }
+  };
+
+  useEffect(() => {
+    fetchTask();
+  }, []);
+
+  useEffect(() => {
+    console.log(task);
+  }, [task]);
 
   return (
     <div>
@@ -44,13 +68,23 @@ function DisplayTasksPage() {
 
         const currentDay = date.getDate();
         const currentDayName = day
+        const currentYear = date.getFullYear();
+        const currentMonth = date.getMonth() + 1;
 
         return (
           <div key={currentDay}>
             {currentDay}
             <br />
             {currentDayName}
+            <div>
+            {task.map((task) => {
+              if (task.dueDate == `${currentMonth}/${currentDay}/${currentYear}`) {
+                return <Button key={task.id} />;
+              }
+            })}
+      </div>
           </div>
+          
         );
       })}
     </div>
