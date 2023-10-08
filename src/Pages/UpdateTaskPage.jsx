@@ -1,11 +1,14 @@
-import Navbar from "../components/Navbar";
+import Navbar from '../components/Navbar';
+import TaskForm from '../components/TaskForm';
 
-function UpdateTaskPage () {
+function UpdateTaskPage() {
   return (
     <>
-      <Navbar/>
+      <Navbar />
+
+      <TaskForm></TaskForm>
     </>
-  )
-};
+  );
+}
 
 export default UpdateTaskPage;
