@@ -3,22 +3,29 @@ import { useNavigate } from 'react-router-dom';
 import iconCreate from '../assets/create.png';
 import Button from '../components/Button';
 
-const TaskForm = ({ isUpdate, project }) => {
+const TaskForm = ({ isUpdate, task }) => {
   const navigate = useNavigate();
 
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
+  const [date, setDate] = useState('');
+  const [time, setTime] = useState('');
+  const [priority, setPriority] = useState('priority');
 
   const onSubmit = async (event) => {
-    debugger;
     event.preventDefault();
-    const payload = { title, description };
+    const payload = {
+      title,
+      description,
+      date,
+      time,
+      priority,
+      completed: false,
+    };
 
     try {
       const response = await fetch(
-        `${import.meta.env.VITE_API_URL}/tasks${
-          isUpdate ? `/${project.id}` : ''
-        }`,
+        `${import.meta.env.VITE_API_URL}/tasks${isUpdate ? `/${task.id}` : ''}`,
         {
           method: isUpdate ? 'PUT' : 'POST',
           body: JSON.stringify(payload),
@@ -29,9 +36,9 @@ const TaskForm = ({ isUpdate, project }) => {
       );
       console.log(response);
       if (response.ok) {
-        const currentProject = await response.json();
-        console.log(currentProject);
-        navigate(`/`);
+        const currentTask = await response.json();
+        console.log(currentTask);
+        //navigate(`/`);
       }
     } catch (error) {
       console.log(error);
@@ -39,18 +46,37 @@ const TaskForm = ({ isUpdate, project }) => {
   };
 
   useEffect(() => {
-    if (isUpdate && project) {
-      setTitle(project.title);
-      setDescription(project.description);
+    if (isUpdate && task) {
+      setDate(task.date);
+      setTime(task.time);
+      setPriority(task.priority);
+      setTitle(task.title);
+      setDescription(task.description);
     }
-  }, [project]);
+  }, [task]);
 
   return (
     <form id='task-form' onSubmit={onSubmit}>
       <div className='top-bar'>
-        <input type='date' />
-        <input type='time' />
-        <select defaultValue='priority'>
+        <input
+          required
+          type='date'
+          value={date}
+          onChange={(event) => setDate(event.target.value)}
+        />
+        <input
+          required
+          type='time'
+          value={time}
+          onChange={(event) => setTime(event.target.value)}
+        />
+        <select
+          required
+          value={priority}
+          onChange={(event) => {
+            setPriority(event.target.value);
+          }}
+        >
           <option disabled value='priority'>
             Priority
           </option>
