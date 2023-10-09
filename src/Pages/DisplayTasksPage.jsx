@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import Navbar from '../components/Navbar';
 import Button from '../components/Button';
+import Task from '../components/Task'
 
 function DisplayTasksPage() {
   const [currentDate, setCurrentDate] = useState(new Date());
@@ -54,6 +55,8 @@ function DisplayTasksPage() {
     console.log(task);
   }, [task]);
 
+  const sortedTasks = [...task].sort((a, b) => a.time.localeCompare(b.time));
+
   return (
     <div>
       <Navbar/>
@@ -74,18 +77,28 @@ function DisplayTasksPage() {
             const currentMonth = date.getMonth() + 1;
 
             return (
-              <div key={currentDay}>
-                {currentDay}
-                <br />
-                {currentDayName}
-                <div>
-                  {task.map((task) => {
-                    if (task.dueDate == `${currentMonth}/${currentDay}/${currentYear}`) {
-                      return <Button key={task.id} />;
-                    }
-                  })}
+                <div className='day-wrapper' key={currentDay}>
+                  <p className="day-date">{currentDay}</p>
+                  <p className="day-date">{currentDayName}</p>
+                  <div className='task-wrapper'>
+                    <div>
+                      {sortedTasks.map((task) => {
+                        if (task.dueDate == `${currentYear}-${currentMonth}-${currentDay}` && task.completed === false) {
+                          return (
+                          <Task 
+                          key={task.id} 
+                          id={task.id}
+                          title={task.title} 
+                          time={task.time} 
+                          description={task.description} 
+                          priority={task.priority}
+                          completed={task.completed}
+                          />)
+                        }
+                      })}
+                    </div>
+                  </div>
                 </div>
-              </div>
             );
           })}
         </div>
