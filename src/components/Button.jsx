@@ -17,7 +17,7 @@ function Button({icon, text, color, onClick, to }) {
 
     // If to is provided, use the Link component to create a route link.
     return (
-        <Link to={to} className="button" style={buttonStyle}>
+        <Link to={to} className="button button-link" style={buttonStyle}>
             {icon && <span className="button-icon">{icon}</span>}
             {text}
         </Link>
