@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import Navbar from '../components/Navbar';
 import Button from '../components/Button';
 import Task from '../components/Task'
+import AddTaskButton from '../components/AddTaskButton';
 
 function DisplayTasksPage() {
   const [currentDate, setCurrentDate] = useState(new Date());
@@ -39,7 +40,6 @@ function DisplayTasksPage() {
 
       if (response.ok) {
         const allTask = await response.json();
-
         setTask(allTask);
       }
     } catch (error) {
@@ -51,11 +51,10 @@ function DisplayTasksPage() {
     fetchTask();
   }, []);
 
-  useEffect(() => {
-    console.log(task);
-  }, [task]);
+  // useEffect(() => {
+  // }, [task]);
 
-  const sortedTasks = [...task].sort((a, b) => a.time.localeCompare(b.time));
+  const sortedTasks = [...task].sort((a, b) => (a.time ? a.time.localeCompare(b.time) : 0));
 
   return (
     <div>
@@ -97,13 +96,16 @@ function DisplayTasksPage() {
                         }
                       })}
                     </div>
+                  <AddTaskButton date={task.dueDate}/>
                   </div>
                 </div>
             );
           })}
         </div>
-        <button onClick={goToPreviousWeek}>Left</button>
-        <button onClick={goToNextWeek}>Right</button>
+        <div className="nav-button-wrapper">
+          <button className="nav-button" onClick={goToPreviousWeek}>Left</button>
+          <button className="nav-button" onClick={goToNextWeek}>Right</button>
+        </div>
       </div>
     </div>
   );

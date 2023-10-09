@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import Button from "./Button";
 import iconCreate from '../assets/create.png';
 
-const Task = ({ id, title, time, description, priority }) => {
+const Task = ({ id, title, time, description, priority, completed }) => {
     const [isUnfolded, setIsUnfolded] = useState(false);
     const [isDeleted, setIsDeleted] = useState(false);
 
@@ -23,33 +23,47 @@ const Task = ({ id, title, time, description, priority }) => {
         setIsUnfolded(!isUnfolded);
     };
 
-    const [tasks, setTasks] = useState([]);
-    
-
-    const handleTaskDelete = (taskId) => {      
-        fetch(`${import.meta.env.VITE_API_URL}/tasks/${id}`, {
-          method: 'DELETE', // Use the DELETE HTTP method
-          headers: {
-            'Content-Type': 'application/json', // Adjust the content type as needed
-            // You may need to include any authentication headers here
-          },
-        })
-          .then((response) => {
+    const handleTaskDelete = async () => {
+        try {
+            const response = await fetch(
+                `${import.meta.env.VITE_API_URL}/tasks/${id}`, 
+                {
+                    method: 'DELETE',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                }
+            );
+      
             if (response.ok) {
-              // Task was successfully deleted
-              // You can update your local state to remove the task with taskId
-              // For example, you can filter out the deleted task from your tasks array
-              setTasks(tasks.filter((task) => task.id !== taskId));
-              setIsDeleted(true)
-            } else {
-              // Handle any errors here
-              console.error('Error deleting task');
+                setIsDeleted(true);
+            } 
+        } 
+        catch (error) {
+          console.error('Fetch error:', error);
+        }
+    };
+
+    const markAsComplete = async () => {
+        try {
+            const response = await fetch(
+                `${import.meta.env.VITE_API_URL}/tasks/${id}`, 
+                {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ completed: true }),
+                }
+            );
+      
+            if (response.ok) {
+                setIsDeleted(true);
+            }} 
+            catch (error) {
+                console.error('Fetch error:', error);
             }
-          })
-          .catch((error) => {
-            console.error('Fetch error:', error);
-          });
-      };
+    };
   
     return (
       <div className = {`task-box ${isDeleted? 'hidden' : 'visible'}`} onClick={toggleUnfold} style={{backgroundColor:setPriorityColor()}}>
@@ -64,17 +78,17 @@ const Task = ({ id, title, time, description, priority }) => {
             />
             <div className="space"></div>
             <Button
+            onClick={markAsComplete}
+            text="DONE"
+            icon={<img src={iconCreate} alt="Icon" />}
+            color="#00e1c0"
+            />
+            <div className="space"></div>
+            <Button
             onClick={handleTaskDelete}
             text="DELETE"
             icon={<img src={iconCreate} alt="Icon" />}
             color="#ff7984"
-            />
-            <div className="space"></div>
-            <Button
-            to={`/tasks/${id}/update`}
-            text="DONE"
-            icon={<img src={iconCreate} alt="Icon" />}
-            color="#00e1c0"
             />
         </div>
       </div>
