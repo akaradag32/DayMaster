@@ -61,6 +61,7 @@ const TaskForm = ({ isUpdate, project }) => {
       </div>
       <label className='title'>
         <input
+          placeholder='Title...'
           value={title}
           onChange={(event) => setTitle(event.target.value)}
           required
@@ -68,6 +69,7 @@ const TaskForm = ({ isUpdate, project }) => {
       </label>
       <label>
         <textarea
+          placeholder='Description...'
           value={description}
           onChange={(event) => setDescription(event.target.value)}
           required
