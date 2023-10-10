@@ -82,7 +82,7 @@ function DisplayTasksPage() {
                   <div className='task-wrapper'>
                     <div>
                       {sortedTasks.map((task) => {
-                        if (task.dueDate == `${currentYear}-${currentMonth}-${currentDay}` && task.completed === false) {
+                        if (task.dueDate == `${currentYear}-${currentMonth}-${currentDay < 10 ? '0' + currentDay : currentDay}` && task.completed === false) {
                           return (
                           <Task 
                           key={task.id} 
