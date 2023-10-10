@@ -1,6 +1,6 @@
 import { Link, useNavigate } from 'react-router-dom';
 
-function Button({ icon, text, color, onClick, to, type, taskId }) {
+function Button({ icon, text, color, onClick, to, type }) {
   const navigate = useNavigate();
   const buttonStyle = {
     backgroundColor: color,

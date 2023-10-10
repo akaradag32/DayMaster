@@ -34,6 +34,7 @@ const TaskForm = ({ isUpdate, task }) => {
           },
         }
       );
+
       console.log(response);
       if (response.ok) {
         const currentTask = await response.json();
@@ -45,30 +46,46 @@ const TaskForm = ({ isUpdate, task }) => {
     }
   };
 
-// priority color change
+  //FIX ======== On Update It Redirects to Tasks Page?
+  const handleRandom = async () => {
+    const response = await fetch('http://www.boredapi.com/api/activity/');
+
+    let date = new Date().toJSON().slice(0, 10);
+    let time = new Date().toJSON().slice(11, 16);
+
+    if (response.ok) {
+      const randomTask = await response.json();
+
+      setDueDate(date);
+      setTime(time);
+      setPriority('High');
+      setTitle(randomTask.type);
+      setDescription(randomTask.activity);
+    }
+  };
+  // priority color change
 
   useEffect(() => {
     const selectElement = document.getElementById('priority-select');
-    
+
     const handleSelectChange = (event) => {
       const selectedOption = event.target.value;
-      
+
       const colors = {
         High: '#ff7984',
         Medium: '#ffb600',
         Low: '#00e1c0',
       };
-  
+
       selectElement.style.backgroundColor = colors[selectedOption];
     };
-  
+
     handleSelectChange({ target: { value: priority } });
 
     selectElement.addEventListener('change', handleSelectChange);
-
   }, [priority]);
 
-/////////////////////////  
+  /////////////////////////
 
   useEffect(() => {
     if (isUpdate && task) {
@@ -84,14 +101,14 @@ const TaskForm = ({ isUpdate, task }) => {
     <form id='task-form' onSubmit={onSubmit}>
       <div className='top-bar'>
         <input
-          className="date-time"
+          className='date-time'
           required
           type='date'
           value={dueDate}
           onChange={(event) => setDueDate(event.target.value)}
         />
         <input
-          className="date-time"
+          className='date-time'
           required
           type='time'
           value={time}
@@ -100,7 +117,7 @@ const TaskForm = ({ isUpdate, task }) => {
         <select
           required
           value={priority}
-          id="priority-select"
+          id='priority-select'
           onChange={(event) => {
             setPriority(event.target.value);
           }}
@@ -131,13 +148,19 @@ const TaskForm = ({ isUpdate, task }) => {
       </label>
       <div style={{ display: 'flex', justifyContent: 'space-between' }}>
         <Button
-            to='/tasks'
-            text='TASK BOARD'
-            icon={<img src={iconCreate} alt='Icon' />}
+          to='/tasks'
+          text='TASK BOARD'
+          icon={<img src={iconCreate} alt='Icon' />}
+        ></Button>
+        <Button
+          onClick={handleRandom}
+          text='RANDOM'
+          color='#b3bbc9'
+          icon={<img src={iconCreate} alt='Icon' />}
         ></Button>
         <Button
           type='submit'
-          color="#00e1c0"
+          color='#00e1c0'
           text={isUpdate ? 'UPDATE' : 'CREATE'}
           icon={<img src={iconCreate} alt='Icon' />}
         ></Button>
