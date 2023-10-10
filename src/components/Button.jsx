@@ -1,6 +1,7 @@
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
-function Button({ icon, text, color, onClick, to, type }) {
+function Button({ icon, text, color, onClick, to, type, taskId }) {
+  const navigate = useNavigate();
   const buttonStyle = {
     backgroundColor: color,
   };
@@ -22,7 +23,6 @@ function Button({ icon, text, color, onClick, to, type }) {
       </button>
     );
   }
-
   // If to is provided, use the Link component to create a route link.
   return (
     <Link to={to} type='submit' className='button' style={buttonStyle}>

@@ -13,7 +13,6 @@ function UpdateTaskPage() {
       `${import.meta.env.VITE_API_URL}/tasks/${taskId}`
     );
 
-    debugger;
     if (response.ok) {
       const task = await response.json();
       setTask(task);

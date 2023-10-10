@@ -8,7 +8,7 @@ const TaskForm = ({ isUpdate, task }) => {
 
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
-  const [date, setDate] = useState('');
+  const [dueDate, setDueDate] = useState('');
   const [time, setTime] = useState('');
   const [priority, setPriority] = useState('priority');
 
@@ -17,7 +17,7 @@ const TaskForm = ({ isUpdate, task }) => {
     const payload = {
       title,
       description,
-      date,
+      dueDate,
       time,
       priority,
       completed: false,
@@ -45,9 +45,27 @@ const TaskForm = ({ isUpdate, task }) => {
     }
   };
 
+  const onDelete = async () => {
+    try {
+      const response = await fetch(
+        `${import.meta.env.VITE_API_URL}/tasks/${taskId}`,
+        {
+          method: 'DELETE',
+        }
+      );
+      if (response.ok) {
+        const parsed = await response.json();
+        console.log(parsed);
+        navigate('/tasks');
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   useEffect(() => {
     if (isUpdate && task) {
-      setDate(task.date);
+      setDueDate(task.dueDate);
       setTime(task.time);
       setPriority(task.priority);
       setTitle(task.title);
@@ -61,8 +79,8 @@ const TaskForm = ({ isUpdate, task }) => {
         <input
           required
           type='date'
-          value={date}
-          onChange={(event) => setDate(event.target.value)}
+          value={dueDate}
+          onChange={(event) => setDueDate(event.target.value)}
         />
         <input
           required
@@ -80,9 +98,9 @@ const TaskForm = ({ isUpdate, task }) => {
           <option disabled value='priority'>
             Priority
           </option>
-          <option value='high'>High</option>
-          <option value='medium'>Medium</option>
-          <option value='low'>Low</option>
+          <option value='High'>High</option>
+          <option value='Medium'>Medium</option>
+          <option value='Low'>Low</option>
         </select>
       </div>
       <label className='title'>
@@ -101,10 +119,17 @@ const TaskForm = ({ isUpdate, task }) => {
           required
         />
       </label>
+      {isUpdate && (
+        <Button
+          onClick={onDelete}
+          text='DELETE'
+          //Fix DELETE BUTTON
+          icon={<img src={iconCreate} alt='Icon' />}
+        ></Button>
+      )}
       <Button
         type='submit'
         text={isUpdate ? 'UPDATE' : 'CREATE'}
-        onClick={''}
         icon={<img src={iconCreate} alt='Icon' />}
       ></Button>
     </form>
