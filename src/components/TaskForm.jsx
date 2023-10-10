@@ -25,9 +25,7 @@ const TaskForm = ({ isUpdate, task }) => {
 
     try {
       const response = await fetch(
-        `${import.meta.env.VITE_API_URL}/tasks${
-          isUpdate ? `/${task.id}/update` : ''
-        }`,
+        `${import.meta.env.VITE_API_URL}/tasks${isUpdate ? `/${task.id}` : ''}`,
         {
           method: isUpdate ? 'PUT' : 'POST',
           body: JSON.stringify(payload),
@@ -47,23 +45,30 @@ const TaskForm = ({ isUpdate, task }) => {
     }
   };
 
-  const onDelete = async () => {
-    try {
-      const response = await fetch(
-        `${import.meta.env.VITE_API_URL}/tasks/${taskId}/update`,
-        {
-          method: 'DELETE',
-        }
-      );
-      if (response.ok) {
-        const parsed = await response.json();
-        console.log(parsed);
-        navigate('/tasks');
-      }
-    } catch (error) {
-      console.log(error);
-    }
-  };
+// priority color change
+
+  useEffect(() => {
+    const selectElement = document.getElementById('priority-select');
+    
+    const handleSelectChange = (event) => {
+      const selectedOption = event.target.value;
+      
+      const colors = {
+        High: '#ff7984',
+        Medium: '#ffb600',
+        Low: '#00e1c0',
+      };
+  
+      selectElement.style.backgroundColor = colors[selectedOption];
+    };
+  
+    handleSelectChange({ target: { value: priority } });
+
+    selectElement.addEventListener('change', handleSelectChange);
+
+  }, [priority]);
+
+/////////////////////////  
 
   useEffect(() => {
     if (isUpdate && task) {
@@ -95,6 +100,7 @@ const TaskForm = ({ isUpdate, task }) => {
         <select
           required
           value={priority}
+          id="priority-select"
           onChange={(event) => {
             setPriority(event.target.value);
           }}
@@ -123,14 +129,6 @@ const TaskForm = ({ isUpdate, task }) => {
           required
         />
       </label>
-      {isUpdate && (
-        <Button
-          onClick={onDelete}
-          text='DELETE'
-          //Fix DELETE BUTTON
-          icon={<img src={iconCreate} alt='Icon' />}
-        ></Button>
-      )}
       <Button
         type='submit'
         text={isUpdate ? 'UPDATE' : 'CREATE'}
