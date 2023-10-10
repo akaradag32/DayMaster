@@ -1,10 +1,10 @@
 import { useState } from 'react';
 import './App.css';
 import { Route, Routes } from 'react-router-dom';
-import HomePage from "./Pages/HomePage";
-import DisplayTasksPage from "./Pages/DisplayTasksPage"
-import CreateTaskPage from "./Pages/CreateTaskPage"
-import UpdateProjectPage from "./Pages/UpdateTaskPage"
+import HomePage from './Pages/HomePage';
+import DisplayTasksPage from './Pages/DisplayTasksPage';
+import CreateTaskPage from './Pages/CreateTaskPage';
+import UpdateProjectPage from './Pages/UpdateTaskPage';
 
 function App() {
   return (
