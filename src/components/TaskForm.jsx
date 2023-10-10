@@ -25,9 +25,7 @@ const TaskForm = ({ isUpdate, task }) => {
 
     try {
       const response = await fetch(
-        `${import.meta.env.VITE_API_URL}/tasks${
-          isUpdate ? `/${task.id}/update` : ''
-        }`,
+        `${import.meta.env.VITE_API_URL}/tasks${isUpdate ? `/${task.id}` : ''}`,
         {
           method: isUpdate ? 'PUT' : 'POST',
           body: JSON.stringify(payload),
@@ -41,24 +39,6 @@ const TaskForm = ({ isUpdate, task }) => {
         const currentTask = await response.json();
         console.log(currentTask);
         navigate(`/tasks`);
-      }
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
-  const onDelete = async () => {
-    try {
-      const response = await fetch(
-        `${import.meta.env.VITE_API_URL}/tasks/${taskId}/update`,
-        {
-          method: 'DELETE',
-        }
-      );
-      if (response.ok) {
-        const parsed = await response.json();
-        console.log(parsed);
-        navigate('/tasks');
       }
     } catch (error) {
       console.log(error);
