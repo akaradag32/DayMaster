@@ -129,11 +129,19 @@ const TaskForm = ({ isUpdate, task }) => {
           required
         />
       </label>
-      <Button
-        type='submit'
-        text={isUpdate ? 'UPDATE' : 'CREATE'}
-        icon={<img src={iconCreate} alt='Icon' />}
-      ></Button>
+      <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+        <Button
+            to='/tasks'
+            text='TASK BOARD'
+            icon={<img src={iconCreate} alt='Icon' />}
+        ></Button>
+        <Button
+          type='submit'
+          color="#00e1c0"
+          text={isUpdate ? 'UPDATE' : 'CREATE'}
+          icon={<img src={iconCreate} alt='Icon' />}
+        ></Button>
+      </div>
     </form>
   );
 };

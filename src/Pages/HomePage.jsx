@@ -13,11 +13,19 @@ function HomePage() {
           achieve your goals, our Task Manager is here to make your life more
           organized and productive.
         </p>
-        <Button
-          to='/createTask'
-          text='CREATE'
-          icon={<img src={iconCreate} alt='Icon' />}
-        ></Button>
+        <div style={{ display: 'flex', justifyContent: 'space-between', width:"300px" }}>
+          <Button
+            to='/createTask'
+            text='CREATE'
+            color="#00e1c0"
+            icon={<img src={iconCreate} alt='Icon' />}
+          ></Button>
+          <Button
+            to='/tasks'
+            text='TASK BOARD'
+            icon={<img src={iconCreate} alt='Icon' />}
+          ></Button>
+        </div>
       </div>
     </div>
   );

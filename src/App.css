@@ -57,12 +57,16 @@ a{
   font-size: 14px;
   border-style: none;
   cursor: pointer;
-  transition: width 0.5s ease, max-width 0.5s ease;
+  transition: width 0.3s ease, max-width 0.3s ease;
 }
 
 .button:hover{
-  width:82%;
-  max-width: 120px;
+  width:111%;
+  max-width: 150px;
+}
+
+.button-link:hover{
+  width:100%;
 }
 
 .button-link{
@@ -111,6 +115,15 @@ a{
   padding: 20px 0;
   height: 510px;
   overflow: scroll;
+}
+
+.task-manager-container::-webkit-scrollbar {
+  display: none;
+}
+
+.task-manager-container {
+  -ms-overflow-style: none;  
+  scrollbar-width: none; 
 }
 
 .month {
