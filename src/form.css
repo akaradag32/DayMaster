@@ -26,10 +26,16 @@ form label textarea {
   border-radius: 14px;
   box-sizing: border-box;
   background-color: #f5f6fa;
+  outline: none;
+  font: inherit;
 }
 
 form label textarea {
   height: 10rem;
+}
+
+form label input {
+  font-weight: 600;
 }
 
 form select :disabled {
@@ -47,6 +53,25 @@ form .top-bar textarea {
   border-radius: 14px;
   box-sizing: border-box;
   background-color: #b3bbc9;
+  font: inherit;
+  font-size: 14px;
+}
+
+form .top-bar select{
+cursor: pointer;
+}
+
+.date-time{
+  cursor: text;
+  outline: none;
+}
+
+::-webkit-calendar-picker-indicator{
+  cursor: pointer;
+}
+
+.date-time:hover{
+  filter: brightness(1.05)
 }
 
 form .top-bar select {

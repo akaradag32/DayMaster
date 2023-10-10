@@ -80,7 +80,6 @@ function DisplayTasksPage() {
                   <p className="day-date">{currentDay}</p>
                   <p className="day-date">{currentDayName}</p>
                   <div className='task-wrapper'>
-                    <div>
                       {sortedTasks.map((task) => {
                         if (task.dueDate == `${currentYear}-${currentMonth}-${currentDay < 10 ? '0' + currentDay : currentDay}` && task.completed === false) {
                           return (
@@ -95,7 +94,6 @@ function DisplayTasksPage() {
                           />)
                         }
                       })}
-                    </div>
                   <AddTaskButton date={task.dueDate}/>
                   </div>
                 </div>

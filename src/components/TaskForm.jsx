@@ -79,12 +79,14 @@ const TaskForm = ({ isUpdate, task }) => {
     <form id='task-form' onSubmit={onSubmit}>
       <div className='top-bar'>
         <input
+          className="date-time"
           required
           type='date'
           value={dueDate}
           onChange={(event) => setDueDate(event.target.value)}
         />
         <input
+          className="date-time"
           required
           type='time'
           value={time}
