@@ -121,14 +121,6 @@ const TaskForm = ({ isUpdate, task }) => {
           required
         />
       </label>
-      {isUpdate && (
-        <Button
-          onClick={onDelete}
-          text='DELETE'
-          //Fix DELETE BUTTON
-          icon={<img src={iconCreate} alt='Icon' />}
-        ></Button>
-      )}
       <Button
         type='submit'
         text={isUpdate ? 'UPDATE' : 'CREATE'}
