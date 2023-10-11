@@ -46,7 +46,7 @@ const TaskForm = ({ isUpdate, task }) => {
 
   //FIX ======== On Update It Redirects to Tasks Page?
   const handleRandom = async () => {
-    const response = await fetch('http://www.boredapi.com/api/activity/');
+    const response = await fetch('https://www.boredapi.com/api/activity/');
 
     let date = new Date().toJSON().slice(0, 10);
     let time = new Date().toJSON().slice(11, 16);
