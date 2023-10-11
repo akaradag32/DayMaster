@@ -6,7 +6,7 @@ function Button({ icon, text, color, onClick, to, type }) {
   };
 
   if (onClick) {
-    debugger;
+    
     // If onClick is provided, use a regular button with an onClick event.
     return (
       <button
@@ -20,7 +20,7 @@ function Button({ icon, text, color, onClick, to, type }) {
       </button>
     );
   } else if (type === 'submit') {
-    debugger;
+
     // If type is provided, use a regular button with an form submit event.
     return (
       <button type={type} className='button' style={buttonStyle}>
@@ -29,7 +29,7 @@ function Button({ icon, text, color, onClick, to, type }) {
       </button>
     );
   }
-  debugger;
+
   // If to is provided, use the Link component to create a route link.
   return (
     <Link

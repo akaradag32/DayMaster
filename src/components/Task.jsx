@@ -1,10 +1,9 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Button from "./Button";
 import iconCreate from '../assets/create.png';
 
-const Task = ({ id, title, time, description, priority, completed }) => {
+const Task = ({ id, title, time, description, priority, completed, onTaskDeleted, onTaskCompleted }) => {
     const [isUnfolded, setIsUnfolded] = useState(false);
-    const [isDeleted, setIsDeleted] = useState(false);
 
     const setPriorityColor = () => {
       switch (priority) {
@@ -36,37 +35,38 @@ const Task = ({ id, title, time, description, priority, completed }) => {
             );
       
             if (response.ok) {
-                setIsDeleted(true);
+                onTaskDeleted(id);
             } 
         } 
         catch (error) {
           console.error('Fetch error:', error);
         }
     };
-
+    
     const markAsComplete = async () => {
         try {
             const response = await fetch(
                 `${import.meta.env.VITE_API_URL}/tasks/${id}`, 
                 {
-                method: 'PUT',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({ completed: true }),
+                    method: 'PUT',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ completed: true }),
                 }
-            );
-      
-            if (response.ok) {
-                setIsDeleted(true);
-            }} 
-            catch (error) {
-                console.error('Fetch error:', error);
-            }
+                );
+                
+                if (response.ok) {
+                    onTaskCompleted(id);
+                }
+            } 
+                catch (error) {
+                    console.error('Fetch error:', error);
+                }
     };
-  
+
     return (
-      <div className = {`task-box ${isDeleted? 'hidden' : 'visible'}`} onClick={toggleUnfold} style={{backgroundColor:setPriorityColor()}}>
+      <div className = {`task-box`} onClick={toggleUnfold} style={{backgroundColor:setPriorityColor()}}>
         <p className = "task-title">{title}</p>
         <p className = "task-time">{time}</p>
         <div className = {`unfold ${isUnfolded ? 'visible' : 'hidden'}`}>

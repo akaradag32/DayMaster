@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import Navbar from '../components/Navbar';
-import Button from '../components/Button';
 import Task from '../components/Task'
 import AddTaskButton from '../components/AddTaskButton';
 
@@ -47,6 +46,18 @@ function DisplayTasksPage() {
     }
   };
 
+  const handleTaskDeleted = (taskId) => {
+    setTask((tasks) => tasks.filter((task) => task.id !== taskId));
+  };
+
+  const handleTaskCompleted = (taskId) => {
+    setTask((tasks) =>
+      tasks.map((task) =>
+        task.id === taskId ? { completed: true } : task
+      )
+    );
+  };
+
   useEffect(() => {
     fetchTask();
   }, []);
@@ -91,6 +102,8 @@ function DisplayTasksPage() {
                           description={task.description} 
                           priority={task.priority}
                           completed={task.completed}
+                          onTaskDeleted={handleTaskDeleted}
+                          onTaskCompleted={handleTaskCompleted}
                           />)
                         }
                       })}
