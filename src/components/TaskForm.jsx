@@ -149,11 +149,13 @@ const TaskForm = ({ isUpdate, task }) => {
       <div style={{ display: 'flex', justifyContent: 'space-between' }}>
         <Button
           to='/tasks'
+          type='button'
           text='TASK BOARD'
           icon={<img src={iconCreate} alt='Icon' />}
         ></Button>
         <Button
           onClick={handleRandom}
+          type='button'
           text='RANDOM'
           color='#b3bbc9'
           icon={<img src={iconCreate} alt='Icon' />}
