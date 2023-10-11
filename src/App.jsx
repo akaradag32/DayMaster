@@ -12,6 +12,7 @@ function App() {
       <Routes>
         <Route path='/' element={<HomePage />} />
         <Route path='/tasks' element={<DisplayTasksPage />} />
+        <Route path='/createTask' element={<CreateTaskPage />} />
         <Route path='/createTask/:date' element={<CreateTaskPage />} />
         <Route path='/tasks/:taskId/update' element={<UpdateProjectPage />} />
 
