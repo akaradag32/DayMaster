@@ -1,6 +1,8 @@
 import { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
-import iconCreate from '../assets/create.png';
+import iconRandom from '../assets/random.png';
+import iconBoard from '../assets/board.png';
+import iconDone from '../assets/done.png';
 import Button from '../components/Button';
 
 const TaskForm = ({ isUpdate, task }) => {
@@ -150,20 +152,20 @@ const TaskForm = ({ isUpdate, task }) => {
           to='/tasks'
           type='button'
           text='TASK BOARD'
-          icon={<img src={iconCreate} alt='Icon' />}
+          icon={<img src={iconBoard} alt='Icon' />}
         ></Button>
         <Button
           onClick={handleRandom}
           type='button'
           text='RANDOM'
           color='#b3bbc9'
-          icon={<img src={iconCreate} alt='Icon' />}
+          icon={<img src={iconRandom} alt='Icon' />}
         ></Button>
         <Button
           type='submit'
           color='#00e1c0'
           text={isUpdate ? 'UPDATE' : 'CREATE'}
-          icon={<img src={iconCreate} alt='Icon' />}
+          icon={<img src={iconDone} alt='Icon' />}
         ></Button>
       </div>
     </form>

@@ -1,6 +1,7 @@
 import Navbar from '../components/Navbar';
 import Button from '../components/Button';
-import iconCreate from '../assets/create.png';
+import iconBoard from '../assets/board.png';
+import iconCreateGr from '../assets/create-gr.png';
 
 function HomePage() {
   return (
@@ -18,12 +19,12 @@ function HomePage() {
             to='/createTask'
             text='CREATE'
             color="#00e1c0"
-            icon={<img src={iconCreate} alt='Icon' />}
+            icon={<img src={iconCreateGr} alt='Icon' />}
           ></Button>
           <Button
             to='/tasks'
             text='TASK BOARD'
-            icon={<img src={iconCreate} alt='Icon' />}
+            icon={<img src={iconBoard} alt='Icon' />}
           ></Button>
         </div>
       </div>

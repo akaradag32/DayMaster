@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import Button from "./Button";
 import iconCreate from '../assets/create.png';
+import iconDelete from '../assets/delete.png'
+import iconDone from '../assets/done.png'
 
 const Task = ({ id, title, time, description, priority, completed, onTaskDeleted, onTaskCompleted }) => {
     const [isUnfolded, setIsUnfolded] = useState(false);
@@ -80,14 +82,14 @@ const Task = ({ id, title, time, description, priority, completed, onTaskDeleted
             <Button
             onClick={markAsComplete}
             text="DONE"
-            icon={<img src={iconCreate} alt="Icon" />}
+            icon={<img src={iconDone} alt="Icon" />}
             color="#00e1c0"
             />
             <div className="space"></div>
             <Button
             onClick={handleTaskDelete}
             text="DELETE"
-            icon={<img src={iconCreate} alt="Icon" />}
+            icon={<img src={iconDelete} alt="Icon" />}
             color="#ff7984"
             />
         </div>
