@@ -1,18 +1,20 @@
 import React, { useEffect, useState } from 'react';
 import Navbar from '../components/Navbar';
-import Task from '../components/Task'
+import Task from '../components/Task';
 import AddTaskButton from '../components/AddTaskButton';
 
 function DisplayTasksPage() {
   const [currentDate, setCurrentDate] = useState(new Date());
 
-  const daysOfWeek = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
+  const daysOfWeek = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
   const date = new Date(currentDate);
-  const currentMonthName = new Intl.DateTimeFormat('en-US', { month: 'long' }).format(date);
-  
+  const currentMonthName = new Intl.DateTimeFormat('en-US', {
+    month: 'long',
+  }).format(date);
+
   const setToMonday = (date) => {
     if (date.getDay() !== 1) {
-      date.setDate(date.getDate() - (date.getDay() - 1)); 
+      date.setDate(date.getDate() - (date.getDay() - 1));
     }
     // console.log(date.getDay())
   };
@@ -29,7 +31,7 @@ function DisplayTasksPage() {
     setCurrentDate(newDate);
   };
 
-  setToMonday(currentDate); 
+  setToMonday(currentDate);
 
   const [task, setTask] = useState([]);
 
@@ -42,7 +44,7 @@ function DisplayTasksPage() {
         setTask(allTask);
       }
     } catch (error) {
-      console.error("Error fetching data:", error);
+      console.error('Error fetching data:', error);
     }
   };
 
@@ -52,9 +54,7 @@ function DisplayTasksPage() {
 
   const handleTaskCompleted = (taskId) => {
     setTask((tasks) =>
-      tasks.map((task) =>
-        task.id === taskId ? { completed: true } : task
-      )
+      tasks.map((task) => (task.id === taskId ? { completed: true } : task))
     );
   };
 
@@ -65,16 +65,16 @@ function DisplayTasksPage() {
   // useEffect(() => {
   // }, [task]);
 
-  const sortedTasks = [...task].sort((a, b) => (a.time ? a.time.localeCompare(b.time) : 0));
+  const sortedTasks = [...task].sort((a, b) =>
+    a.time ? a.time.localeCompare(b.time) : 0
+  );
 
   return (
     <div>
-      <Navbar/>
+      <Navbar />
       <div className='container'>
         <div>
-          <p className='month'>
-            {currentMonthName.toUpperCase()}
-          </p>
+          <p className='month'>{currentMonthName.toUpperCase()}</p>
         </div>
         <div className='task-manager-container'>
           {daysOfWeek.map((day, index) => {
@@ -82,40 +82,51 @@ function DisplayTasksPage() {
             date.setDate(currentDate.getDate() + index);
 
             const currentDay = date.getDate();
-            const currentDayName = day
+            const currentDayName = day;
             const currentYear = date.getFullYear();
             const currentMonth = date.getMonth() + 1;
 
+            const currentSimpleDate = `${currentYear}-${currentMonth}-${
+              currentDay < 10 ? '0' + currentDay : currentDay
+            }`;
             return (
-                <div className='day-wrapper' key={currentDay}>
-                  <p className="day-date">{currentDay}</p>
-                  <p className="day-date">{currentDayName}</p>
-                  <div className='task-wrapper task-wrapper-scrollable'>
-                      {sortedTasks.map((task) => {
-                        if (task.dueDate == `${currentYear}-${currentMonth}-${currentDay < 10 ? '0' + currentDay : currentDay}` && task.completed === false) {
-                          return (
-                          <Task 
-                          key={task.id} 
+              <div className='day-wrapper' key={currentDay}>
+                <p className='day-date'>{currentDay}</p>
+                <p className='day-date'>{currentDayName}</p>
+                <div className='task-wrapper task-wrapper-scrollable'>
+                  {sortedTasks.map((task) => {
+                    if (
+                      task.dueDate == currentSimpleDate &&
+                      task.completed === false
+                    ) {
+                      return (
+                        <Task
+                          key={task.id}
                           id={task.id}
-                          title={task.title} 
-                          time={task.time} 
-                          description={task.description} 
+                          title={task.title}
+                          time={task.time}
+                          description={task.description}
                           priority={task.priority}
                           completed={task.completed}
                           onTaskDeleted={handleTaskDeleted}
                           onTaskCompleted={handleTaskCompleted}
-                          />)
-                        }
-                      })}
-                  <AddTaskButton date={task.dueDate}/>
-                  </div>
+                        />
+                      );
+                    }
+                  })}
+                  <AddTaskButton date={currentSimpleDate} />
                 </div>
+              </div>
             );
           })}
         </div>
-        <div className="nav-button-wrapper">
-          <button className="nav-button" onClick={goToPreviousWeek}>Left</button>
-          <button className="nav-button" onClick={goToNextWeek}>Right</button>
+        <div className='nav-button-wrapper'>
+          <button className='nav-button' onClick={goToPreviousWeek}>
+            Left
+          </button>
+          <button className='nav-button' onClick={goToNextWeek}>
+            Right
+          </button>
         </div>
       </div>
     </div>
@@ -123,7 +134,3 @@ function DisplayTasksPage() {
 }
 
 export default DisplayTasksPage;
-
-
-
-

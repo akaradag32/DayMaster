@@ -6,7 +6,6 @@ function Button({ icon, text, color, onClick, to, type }) {
   };
 
   if (onClick) {
-    
     // If onClick is provided, use a regular button with an onClick event.
     return (
       <button
@@ -20,7 +19,6 @@ function Button({ icon, text, color, onClick, to, type }) {
       </button>
     );
   } else if (type === 'submit') {
-
     // If type is provided, use a regular button with an form submit event.
     return (
       <button type={type} className='button' style={buttonStyle}>

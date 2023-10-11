@@ -1,14 +1,15 @@
 import { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import iconCreate from '../assets/create.png';
 import Button from '../components/Button';
 
 const TaskForm = ({ isUpdate, task }) => {
+  const { date } = useParams();
   const navigate = useNavigate();
 
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
-  const [dueDate, setDueDate] = useState('');
+  const [dueDate, setDueDate] = useState(date || '');
   const [time, setTime] = useState('');
   const [priority, setPriority] = useState('priority');
 
