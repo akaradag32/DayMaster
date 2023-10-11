@@ -28,6 +28,7 @@ form label textarea {
   background-color: #f5f6fa;
   outline: none;
   font: inherit;
+  resize: none;
 }
 
 form label textarea {

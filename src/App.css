@@ -114,17 +114,9 @@ a{
   box-sizing:border-box;
   padding: 20px 0;
   height: 510px;
-  overflow: scroll;
+  /* overflow: scroll; */
 }
 
-.task-manager-container::-webkit-scrollbar {
-  display: none;
-}
-
-.task-manager-container {
-  -ms-overflow-style: none;  
-  scrollbar-width: none; 
-}
 
 .month {
   color:#9c73ff;
@@ -142,6 +134,41 @@ a{
 .day-date{
   color: #dae0ed;
   margin: 5px 0;
+}
+
+.task-wrapper-scrollable {
+  display: flex;
+  flex-direction: column;
+  min-height: 400px; 
+  background: grey;
+  overflow-y: auto; 
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: none;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #9c73ff;
+  border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #a287f9;
+}
+
+::-webkit-scrollbar-track-piece:end {
+  background: transparent;
+  margin-bottom: 20px; 
+}
+
+::-webkit-scrollbar-track-piece:start {
+  background: transparent;
+  margin-top: 20px;
 }
 
 .task-wrapper{

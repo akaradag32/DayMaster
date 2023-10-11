@@ -79,7 +79,7 @@ function DisplayTasksPage() {
                 <div className='day-wrapper' key={currentDay}>
                   <p className="day-date">{currentDay}</p>
                   <p className="day-date">{currentDayName}</p>
-                  <div className='task-wrapper'>
+                  <div className='task-wrapper task-wrapper-scrollable'>
                       {sortedTasks.map((task) => {
                         if (task.dueDate == `${currentYear}-${currentMonth}-${currentDay < 10 ? '0' + currentDay : currentDay}` && task.completed === false) {
                           return (
