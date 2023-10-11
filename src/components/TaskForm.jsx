@@ -35,10 +35,8 @@ const TaskForm = ({ isUpdate, task }) => {
         }
       );
 
-      console.log(response);
       if (response.ok) {
         const currentTask = await response.json();
-        console.log(currentTask);
         navigate(`/tasks`);
       }
     } catch (error) {

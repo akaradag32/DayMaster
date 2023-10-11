@@ -16,7 +16,6 @@ function UpdateTaskPage() {
     if (response.ok) {
       const task = await response.json();
       setTask(task);
-      console.log(task);
     }
   };
 
