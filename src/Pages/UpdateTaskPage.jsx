@@ -8,14 +8,36 @@ function UpdateTaskPage() {
 
   const [task, setTask] = useState();
 
-  const fetchTask = async () => {
-    const response = await fetch(
-      `${import.meta.env.VITE_API_URL}/tasks/${taskId}`
-    );
+  // Loader
+  useEffect(() => {
+    const loader= document.getElementById('loader');
+    
+    if (loader) {
+      loader.classList.add('loading-spinner');
+    }
+  
+  }, []);
 
-    if (response.ok) {
-      const task = await response.json();
-      setTask(task);
+  const fetchTask = async () => {
+    try {
+      const response = await fetch(
+        `${import.meta.env.VITE_API_URL}/tasks/${taskId}`
+      );
+  
+      if (response.ok) {
+        const task = await response.json();
+        setTask(task);
+      }
+    } catch (error) {
+      console.error('Error fetching data:', error);
+    } finally {
+    // Remove loader
+      const loader = document.getElementById('loader');
+      const loadingContainer = document.getElementById('loading-container');
+        if (loader && loadingContainer) {
+          loader.classList.remove('loading-spinner');
+          loadingContainer.remove();
+        }
     }
   };
 
@@ -23,11 +45,16 @@ function UpdateTaskPage() {
     fetchTask();
   }, []);
 
+  // keep the empty div or navbar will brake when loader is removed
   return (
     <>
       <Navbar />
-
-      <TaskForm isUpdate task={task} />
+      <div>
+        <div id="loading-container">
+          <div id="loader"></div>
+        </div>
+        <TaskForm isUpdate task={task} />
+      </div>
     </>
   );
 }

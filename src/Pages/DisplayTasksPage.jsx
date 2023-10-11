@@ -16,7 +16,6 @@ function DisplayTasksPage() {
     if (date.getDay() !== 1) {
       date.setDate(date.getDate() - (date.getDay() - 1));
     }
-    // console.log(date.getDay())
   };
 
   const goToPreviousWeek = () => {
@@ -35,6 +34,16 @@ function DisplayTasksPage() {
 
   const [task, setTask] = useState([]);
 
+  // Loader
+  useEffect(() => {
+    const loader = document.getElementById('loader');
+  
+    if (loader) {
+      loader.classList.add('loading-spinner');
+    }
+
+  }, []);
+  
   const fetchTask = async () => {
     try {
       const response = await fetch(`${import.meta.env.VITE_API_URL}/tasks`);
@@ -45,7 +54,16 @@ function DisplayTasksPage() {
       }
     } catch (error) {
       console.error('Error fetching data:', error);
+    } finally {
+      // Remove loader
+      const loader = document.getElementById('loader');
+      const loadingContainer = document.getElementById('loading-container');
+        if (loader && loadingContainer) {
+          loader.classList.remove('loading-spinner');
+          loadingContainer.remove();
+        }
     }
+
   };
 
   const handleTaskDeleted = (taskId) => {
@@ -62,9 +80,6 @@ function DisplayTasksPage() {
     fetchTask();
   }, []);
 
-  // useEffect(() => {
-  // }, [task]);
-
   const sortedTasks = [...task].sort((a, b) =>
     a.time ? a.time.localeCompare(b.time) : 0
   );
@@ -73,6 +88,9 @@ function DisplayTasksPage() {
     <div>
       <Navbar />
       <div className='container'>
+          <div id="loading-container">
+            <div id="loader"></div>
+          </div>
         <div>
           <p className='month'>{currentMonthName.toUpperCase()}</p>
         </div>
