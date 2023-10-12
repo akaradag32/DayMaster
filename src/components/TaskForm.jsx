@@ -23,7 +23,7 @@ const TaskForm = ({ isUpdate, task }) => {
     if (isSubmitting) {
       return;
     }
-  
+
     setIsSubmitting(true);
 
     const payload = {
@@ -60,15 +60,15 @@ const TaskForm = ({ isUpdate, task }) => {
   const handleRandom = async () => {
     const response = await fetch('https://www.boredapi.com/api/activity/');
 
-    let date = new Date().toJSON().slice(0, 10);
-    let time = new Date().toJSON().slice(11, 16);
+    let currentDate = new Date().toJSON().slice(0, 10);
+    let currentTime = new Date().toJSON().slice(11, 16);
 
     if (response.ok) {
       const randomTask = await response.json();
 
-      setDueDate(date);
-      setTime(time);
-      setPriority('High');
+      setDueDate(dueDate || date || currentDate);
+      setTime(time || currentTime);
+      setPriority(priority !== 'priority' ? priority : 'High');
       setTitle(randomTask.type);
       setDescription(randomTask.activity);
     }
