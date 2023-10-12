@@ -16,6 +16,8 @@ const TaskForm = ({ isUpdate, task }) => {
   const [dueDate, setDueDate] = useState(date || '');
   const [time, setTime] = useState('');
   const [priority, setPriority] = useState('priority');
+  let currentDate = new Date().toJSON().slice(0, 10);
+  let currentTime = new Date().toJSON().slice(11, 16);
 
   const onSubmit = async (event) => {
     event.preventDefault();
@@ -60,17 +62,18 @@ const TaskForm = ({ isUpdate, task }) => {
   const handleRandom = async () => {
     const response = await fetch('https://www.boredapi.com/api/activity/');
 
-    let currentDate = new Date().toJSON().slice(0, 10);
-    let currentTime = new Date().toJSON().slice(11, 16);
+    try {
+      if (response.ok) {
+        const randomTask = await response.json();
 
-    if (response.ok) {
-      const randomTask = await response.json();
-
-      setDueDate(dueDate || date || currentDate);
-      setTime(time || currentTime);
-      setPriority(priority !== 'priority' ? priority : 'High');
-      setTitle(randomTask.type);
-      setDescription(randomTask.activity);
+        setDueDate(dueDate || date || currentDate);
+        setTime(time || currentTime);
+        setPriority(priority !== 'priority' ? priority : 'Low');
+        setTitle(randomTask.type);
+        setDescription(randomTask.activity);
+      }
+    } catch (error) {
+      console.error('Error fetching data:', error);
     }
   };
 
@@ -94,7 +97,7 @@ const TaskForm = ({ isUpdate, task }) => {
 
     selectElement.addEventListener('change', handleSelectChange);
   }, [priority]);
-  /////////////////////////
+  ///////////////////////// next week prev week // gecmise atama
 
   useEffect(() => {
     if (isUpdate && task) {
@@ -110,6 +113,7 @@ const TaskForm = ({ isUpdate, task }) => {
     <form id='task-form' onSubmit={onSubmit}>
       <div className='top-bar'>
         <input
+          min={currentDate}
           className='date-time'
           required
           type='date'

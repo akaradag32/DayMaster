@@ -37,13 +37,12 @@ function DisplayTasksPage() {
   // Loader
   useEffect(() => {
     const loader = document.getElementById('loader');
-  
+
     if (loader) {
       loader.classList.add('loading-spinner');
     }
-
   }, []);
-  
+
   const fetchTask = async () => {
     try {
       const response = await fetch(`${import.meta.env.VITE_API_URL}/tasks`);
@@ -58,12 +57,11 @@ function DisplayTasksPage() {
       // Remove loader
       const loader = document.getElementById('loader');
       const loadingContainer = document.getElementById('loading-container');
-        if (loader && loadingContainer) {
-          loader.classList.remove('loading-spinner');
-          loadingContainer.remove();
-        }
+      if (loader && loadingContainer) {
+        loader.classList.remove('loading-spinner');
+        loadingContainer.remove();
+      }
     }
-
   };
 
   const handleTaskDeleted = (taskId) => {
@@ -88,9 +86,9 @@ function DisplayTasksPage() {
     <div>
       <Navbar />
       <div className='container'>
-          <div id="loading-container">
-            <div id="loader"></div>
-          </div>
+        <div id='loading-container'>
+          <div id='loader'></div>
+        </div>
         <div>
           <p className='month'>{currentMonthName.toUpperCase()}</p>
         </div>
@@ -140,10 +138,10 @@ function DisplayTasksPage() {
         </div>
         <div className='nav-button-wrapper'>
           <button className='nav-button' onClick={goToPreviousWeek}>
-            Left
+            Previous Week
           </button>
           <button className='nav-button' onClick={goToNextWeek}>
-            Right
+            Next Week
           </button>
         </div>
       </div>
