@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import './App.css';
 import { Route, Routes } from 'react-router-dom';
 import HomePage from './Pages/HomePage';
@@ -15,7 +14,6 @@ function App() {
         <Route path='/createTask' element={<CreateTaskPage />} />
         <Route path='/createTask/:date' element={<CreateTaskPage />} />
         <Route path='/tasks/:taskId/update' element={<UpdateProjectPage />} />
-
         <Route path='*' element={<h1>404 Page</h1>} />
       </Routes>
     </>
