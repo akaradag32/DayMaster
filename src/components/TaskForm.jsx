@@ -9,6 +9,8 @@ const TaskForm = ({ isUpdate, task }) => {
   const { date } = useParams();
   const navigate = useNavigate();
 
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
   const [dueDate, setDueDate] = useState(date || '');
@@ -17,6 +19,13 @@ const TaskForm = ({ isUpdate, task }) => {
 
   const onSubmit = async (event) => {
     event.preventDefault();
+
+    if (isSubmitting) {
+      return;
+    }
+  
+    setIsSubmitting(true);
+
     const payload = {
       title,
       description,
@@ -64,8 +73,8 @@ const TaskForm = ({ isUpdate, task }) => {
       setDescription(randomTask.activity);
     }
   };
-  // priority color change
 
+  // priority color change
   useEffect(() => {
     const selectElement = document.getElementById('priority-select');
 
@@ -85,7 +94,6 @@ const TaskForm = ({ isUpdate, task }) => {
 
     selectElement.addEventListener('change', handleSelectChange);
   }, [priority]);
-
   /////////////////////////
 
   useEffect(() => {
