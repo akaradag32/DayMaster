@@ -56,7 +56,7 @@ The project is organized with the following file structure:
 ## Links
 
 - [Presentation Link](https://www.canva.com/design/DAFw9ZLzh3Y/FiSkZD99AsHLltHS1y4Dug/edit?utm_content=DAFw9ZLzh3Y&utm_campaign=designshare&utm_medium=link2&utm_source=sharebutton)
-- [Github repository Link](https://github.com/akaradag32/task_Manager.git)
+- [Github repository Link](https://github.com/akaradag32/DayMaster)
 - [Deployment Link](https://cerulean-hummingbird-90f820.netlify.app/)
 
 

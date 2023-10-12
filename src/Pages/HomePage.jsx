@@ -11,7 +11,7 @@ function HomePage() {
         <p className='welcome-text'>
           We're thrilled to introduce you to your new, streamlined task
           management companion. Designed to help you conquer your to-do list and
-          achieve your goals, our Task Manager is here to make your life more
+          achieve your goals, DayMaster is here to make your life more
           organized and productive.
         </p>
         <div style={{ display: 'flex', justifyContent: 'space-between', width:"300px" }}>
